@@ -1,26 +1,19 @@
 name: Every Friday
 on: 
   schedule:
-    - cron: "0 8 * * 5"
+    - cron: "0 20 * * 5"
 
 jobs:
   build:
     runs-on: ubunty-latest
     strategy:
       matrix:
-        configuration: [Debug, Release]
+        version: [6, 7, 8]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: |
-                          6.0.x
-                          7.0.x
-                          8.0.x
       - name: Build 
-        run: dotnet build Console/Console.csproj --configuration ${{matrix.configuration }}
+        run: dotnet build Console/Console.csproj --configuration Debug
 
 
     
