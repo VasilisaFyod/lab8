@@ -1,0 +1,22 @@
+name: Every Friday
+on: 
+  schedule:
+    - cron: "0 8 * * 5"
+
+jobs:
+  build:
+    runs-on: ubunty-latest
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+                          6.0.x
+                          7.0.x
+                          8.0.x
+    
